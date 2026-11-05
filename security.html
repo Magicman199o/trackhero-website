@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security · Track Hero</title>
+<meta name="description" content="What Track Hero collects, what it never collects, and the controls you have over your users' data.">
+<meta property="og:title" content="Track Hero · Security">
+<meta property="og:description" content="Your users trust you with their data. Here is exactly how Track Hero protects it.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b0a10">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<style>
+/* Promise: three commitments */
+.promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+.promise { border: 1px solid var(--border); border-radius: 14px; background: var(--surface); padding: 24px; display: flex; flex-direction: column; gap: 10px; }
+.promise .ic { width: 36px; height: 36px; border-radius: 8px; background: var(--tint); color: var(--hero-ink); display: flex; align-items: center; justify-content: center; }
+.promise h3 { font-size: 21px; line-height: 27px; letter-spacing: -0.03em; font-weight: 600; margin-top: 6px; }
+.promise p { color: var(--muted); font-size: 15px; line-height: 23px; }
+@media (max-width: 900px) { .promises { grid-template-columns: 1fr; } }
+
+/* Collected vs never collected */
+.ledger { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+.col { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.col h3 { font-size: 15px; font-weight: 600; padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.col h3 i { width: 8px; height: 8px; border-radius: 50%; }
+.col ul { list-style: none; }
+.col li { padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 15px; line-height: 23px; display: flex; flex-direction: column; gap: 2px; }
+.col li:last-child { border-bottom: 0; }
+.col li small { color: var(--muted); font-size: 13.5px; line-height: 20px; }
+.col.no { background: var(--surface); }
+@media (max-width: 860px) { .ledger { grid-template-columns: 1fr; } }
+
+/* Scrub demo: before and after */
+.scrub { margin-top: 48px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.scrub .r { display: grid; grid-template-columns: 120px 1fr; border-bottom: 1px solid var(--border); }
+.scrub .r:last-child { border-bottom: 0; }
+.scrub .l { padding: 16px 20px; font-family: var(--mono); font-size: 12px; color: var(--subtle); border-right: 1px solid var(--border); text-transform: uppercase; letter-spacing: .06em; }
+.scrub code { padding: 16px 20px; font-family: var(--mono); font-size: 13.5px; line-height: 21px; word-break: break-all; }
+.scrub .in code mark { background: var(--danger-tint); color: var(--danger); border-radius: 3px; padding: 0 2px; }
+.scrub .out { background: var(--surface); }
+.scrub .out code mark { background: var(--teal-tint); color: var(--teal); border-radius: 3px; padding: 0 2px; }
+@media (max-width: 760px) { .scrub .r { grid-template-columns: 1fr; } .scrub .l { border-right: 0; padding-bottom: 0; } }
+
+/* Roadmap honesty */
+.road { margin-top: 48px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.road div { background: var(--surface); padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.road b { font-size: 15px; font-weight: 600; }
+.road span { color: var(--muted); font-size: 14px; line-height: 22px; }
+.road em { font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--pulse); text-transform: uppercase; letter-spacing: .06em; }
+@media (max-width: 760px) { .road { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="ruler" aria-hidden="true"><i></i></div>
+<main>
+  <nav class="top" aria-label="Main">
+    <div class="wrap">
+      <a href="/" class="brand" aria-label="Track Hero home"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#5b3df5"/><path d="M24 15V39Q24 49 34 49H42" fill="none" stroke="#fff" stroke-width="7"/><path d="M13 29H30L46 17" fill="none" stroke="#fff" stroke-width="7"/><circle cx="49" cy="15" r="6" fill="#c6f24e"/></svg>trackhero</a>
+      <div class="links"><a href="/product">Product</a><a href="/security" aria-current="page">Security</a><a href="https://track-hero.vercel.app/docs">Docs</a></div>
+      <div class="r"><a href="https://track-hero.vercel.app/login" class="btn">Log in</a><a href="https://track-hero.vercel.app/signup" class="btn p">Start free</a></div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow"><b></b>Security and privacy</div>
+      <h1>Your users trust you with their data. <em>You can trust us with it.</em></h1>
+      <p class="lede">Track Hero is built to learn how people use your product without learning who they are, unless you choose to tell it. Here is exactly what that means.</p>
+    </div>
+  </header>
+
+  <section class="s">
+    <div class="wrap">
+      <div class="s-head rise">
+        <div class="s-num">01 / Our promise</div>
+        <div><h2>Collect less. Protect everything. Hide nothing.</h2></div>
+      </div>
+      <div class="promises indent rise">
+        <div class="promise">
+          <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
+          <h3>Behaviour, not identities.</h3>
+          <p>We record what happens in your app: pages, clicks, sessions and errors. Not what people type, and not who they are, unless you identify them yourself.</p>
+        </div>
+        <div class="promise">
+          <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg></span>
+          <h3>Scrubbed before it's stored.</h3>
+          <p>Emails, card numbers, passwords and tokens are stripped from addresses, errors and event details the moment they arrive, before anything reaches the database.</p>
+        </div>
+        <div class="promise">
+          <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span>
+          <h3>You stay in control.</h3>
+          <p>You decide which sites can send data, when tracking starts, and when a project and its data are deleted. Every switch is yours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="wrap">
+      <div class="s-head rise">
+        <div class="s-num">02 / What we collect</div>
+        <div><h2>A clear line between what we keep and what we never touch.</h2></div>
+      </div>
+      <div class="ledger indent rise">
+        <div class="col">
+          <h3><i style="background:var(--pulse)"></i>What Track Hero records</h3>
+          <ul>
+            <li>Pages visited and buttons clicked<small>With the button's label, so you know what was clicked.</small></li>
+            <li>Sessions and time on site<small>Using a random ID, not a name.</small></li>
+            <li>Browser, device and country<small>The country is worked out on arrival. The IP address itself is not stored.</small></li>
+            <li>Errors and the steps before them<small>The error message, where it happened and the last few clicks.</small></li>
+            <li>Details you choose to send<small>Your own events, and user traits if you call identify().</small></li>
+          </ul>
+        </div>
+        <div class="col no">
+          <h3><i style="background:var(--danger)"></i>What it never records</h3>
+          <ul>
+            <li>Anything typed into forms<small>The script never reads inputs, text areas or dropdowns.</small></li>
+            <li>Passwords and payment details<small>Password and card fields are ignored entirely.</small></li>
+            <li>IP addresses<small>Used only for a moment to stop abuse, then discarded.</small></li>
+            <li>Secrets in URLs<small>Tokens, keys and codes in links are replaced before storage.</small></li>
+            <li>Anything you mark private<small>Add data-th-ignore to any part of your page and clicks inside it are skipped.</small></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="wrap">
+      <div class="s-head rise">
+        <div class="s-num">03 / Scrubbing</div>
+        <div><h2>Personal data is removed on arrival.</h2><p>A real example. This is what a page address looks like when it reaches Track Hero, and what we actually store.</p></div>
+      </div>
+      <div class="scrub indent rise">
+        <div class="r in"><span class="l">Received</span><code>/reset?<mark>token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIi.Kx9f</mark>&amp;<mark>email=ada@studio.com</mark>&amp;step=2</code></div>
+        <div class="r out"><span class="l">Stored</span><code>/reset?<mark>token=[redacted]</mark>&amp;<mark>email=[redacted]</mark>&amp;step=2</code></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="wrap">
+      <div class="s-head rise">
+        <div class="s-num">04 / Your controls</div>
+        <div><h2>Safeguards built in, switched on by default.</h2></div>
+      </div>
+      <div class="spec indent rise">
+        <div class="row"><span class="k">Separate public and secret keys</span><span class="d">The public key in your website can only send data, never read it. The secret key for your server is shown once, stored scrambled, and can be replaced any time.</span><span class="v">always on</span></div>
+        <div class="row"><span class="k">Allowed domains</span><span class="d">Only accept data from the sites you list, so nobody can fill your project with noise using your public key.</span><span class="v">per project</span></div>
+        <div class="row"><span class="k">Consent mode</span><span class="d">Collect nothing until a visitor agrees, then start with one call. You can also give visitors an opt-out switch.</span><span class="v">one setting</span></div>
+        <div class="row"><span class="k">Encrypted in transit</span><span class="d">Every request to Track Hero travels over HTTPS.</span><span class="v">always on</span></div>
+        <div class="row"><span class="k">Private by account</span><span class="d">Every page checks that you own the project before showing a single number. Database access from the browser is blocked entirely.</span><span class="v">always on</span></div>
+        <div class="row"><span class="k">Abuse limits</span><span class="d">Size limits and rate limits on incoming data keep a broken or hostile script from flooding your project.</span><span class="v">automatic</span></div>
+        <div class="row"><span class="k">Delete a project</span><span class="d">Remove a project and everything it collected from your settings.</span><span class="v">self-serve</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="wrap">
+      <div class="s-head rise">
+        <div class="s-num">05 / In progress</div>
+        <div><h2>Honest about what's next.</h2><p>Track Hero is in beta. These are the protections we're adding before general release.</p></div>
+      </div>
+      <div class="road indent rise">
+        <div><em>Planned</em><b>Delete a single person's data</b><span>Honour individual deletion requests without removing a whole project.</span></div>
+        <div><em>Planned</em><b>Independent security review</b><span>An outside review of the product and infrastructure before we leave beta.</span></div>
+        <div><em>Planned</em><b>Data processing agreement</b><span>A standard agreement for teams that need one for GDPR and similar laws.</span></div>
+        <div><em>Planned</em><b>Privacy policy and terms</b><span>Plain-language documents covering exactly what is described on this page.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="close rise">
+      <h2>Understand your users. <span>Respect them too.</span></h2>
+      <div class="cta"><a href="https://track-hero.vercel.app/signup" class="btn p">Start free</a><a href="/product" class="btn">Explore the product</a></div>
+    </div>
+  </div>
+  <footer><div class="wrap"><span>© 2026 Track Hero · Product analytics and error monitoring for web apps</span><div class="r"><a href="/product">Product</a><a href="/security">Security</a><a href="https://track-hero.vercel.app/docs">Docs</a><a href="https://track-hero.vercel.app/login">Log in</a></div></div></footer>
+</main>
+<script src="/site.js"></script>
+</body>
+</html>
