@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product · Track Hero</title>
+<meta name="description" content="Track Hero records what people do in your web app and catches what breaks. One line to install.">
+<meta property="og:title" content="Track Hero">
+<meta property="og:description" content="Track Hero records what people do in your web app and catches what breaks. One line to install.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b0a10">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0a10; --surface: #15131d; --raised: #1e1b29; --border: #2a2636; --border-strong: #6b6680;
+  --ink: #f4f2fa; --muted: #a6a2b6; --subtle: #8f8aa3;
+  --hero: #8b78ff; --hero-solid: #5b3df5; --pulse: #c6f24e; --danger: #ff8a73; --teal: #4fd1d9;
+  --sans: Geist, "Helvetica Neue", Arial, sans-serif; --mono: "Geist Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+body { overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--pulse); outline-offset: 3px; }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+
+/* Ruler running down the left edge, like the scale on an instrument */
+.ruler { position: fixed; left: 0; top: 0; bottom: 0; width: 28px; border-right: 1px solid var(--border); background:
+  repeating-linear-gradient(to bottom, var(--border) 0 1px, transparent 1px 8px),
+  repeating-linear-gradient(to bottom, var(--border-strong) 0 1px, transparent 1px 40px); background-size: 8px 100%, 16px 100%; background-repeat: repeat-y; background-position: right top, right top; z-index: 5; }
+.ruler i { position: absolute; right: -5px; width: 9px; height: 9px; border-radius: 50%; background: var(--pulse); box-shadow: 0 0 0 4px rgba(198,242,78,.15); top: 0; transition: top .1s linear; }
+@media (max-width: 760px) { .ruler { display: none; } }
+main { padding-left: 28px; }
+@media (max-width: 760px) { main { padding-left: 0; } .wrap { padding: 0 18px; } }
+
+/* Top bar */
+nav.top { position: sticky; top: 0; z-index: 25; background: rgba(11,10,16,.86); border-bottom: 1px solid var(--border); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+nav.top .wrap { display: flex; align-items: center; gap: 28px; height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 20px; letter-spacing: -0.045em; }
+nav.top .links { display: flex; gap: 24px; font-size: 14px; color: var(--muted); }
+nav.top .links a:hover, nav.top .links a[aria-current="page"] { color: var(--ink); }
+nav.top .r { margin-left: auto; display: flex; gap: 10px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 8px; border: 1px solid var(--border-strong); font-size: 14px; font-weight: 500; white-space: nowrap; }
+.btn:hover { background: var(--raised); }
+.btn.p { background: var(--hero); border-color: var(--hero); color: #0e0d14; font-weight: 600; }
+.btn.p:hover { background: #a091ff; }
+@media (max-width: 760px) { nav.top .links { display: none; } nav.top .r .btn:not(.p) { display: none; } }
+
+/* Hero: an oscilloscope screen */
+.hero { padding: 72px 0 40px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; color: var(--subtle); text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+.eyebrow b { width: 8px; height: 8px; border-radius: 50%; background: var(--pulse); box-shadow: 0 0 0 1px #3f5c00; animation: blink 2s infinite; }
+@keyframes blink { 50% { opacity: .35; } }
+h1 { font-size: clamp(44px, 7.4vw, 104px); line-height: .94; letter-spacing: -0.055em; font-weight: 600; margin-top: 22px; max-width: 1000px; }
+h1 em { font-style: normal; color: var(--hero); }
+.lede { font-size: 19px; line-height: 28px; color: var(--muted); max-width: 560px; margin-top: 24px; }
+.cta { display: flex; gap: 10px; margin-top: 32px; flex-wrap: wrap; }
+
+.scope { margin-top: 56px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); overflow: hidden; }
+.scope-head { display: flex; align-items: center; gap: 18px; padding: 12px 18px; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 12px; color: var(--subtle); flex-wrap: wrap; }
+.scope-head .ch { display: flex; align-items: center; gap: 8px; }
+.scope-head .ch i { width: 14px; height: 2px; display: inline-block; }
+.scope-head .r { margin-left: auto; }
+.screen { position: relative; height: 340px; background:
+  linear-gradient(var(--border) 1px, transparent 1px) 0 0 / 100% 20%,
+  linear-gradient(90deg, var(--border) 1px, transparent 1px) 0 0 / 10% 100%; }
+.screen canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.readouts { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); }
+.ro { padding: 16px 20px 18px; border-right: 1px solid var(--border); }
+.ro:last-child { border-right: 0; }
+.ro .l { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--subtle); text-transform: uppercase; }
+.ro .v { font-family: var(--mono); font-size: 30px; line-height: 36px; margin-top: 6px; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.ro .v small { font-size: 15px; color: var(--muted); margin-left: 2px; }
+.ro .d { font-size: 12px; margin-top: 2px; color: var(--teal); font-family: var(--mono); }
+.ro .d.bad { color: var(--danger); }
+.demo-note { font-family: var(--mono); font-size: 11px; color: var(--subtle); padding: 10px 18px; border-top: 1px solid var(--border); }
+@media (max-width: 760px) { .readouts { grid-template-columns: 1fr 1fr; } .ro:nth-child(2) { border-right: 0; } .ro:nth-child(-n+2) { border-bottom: 1px solid var(--border); } .screen { height: 220px; } .ro .v { font-size: 24px; } }
+
+/* Section scaffolding */
+section.s { padding: 112px 0 0; }
+.s-head { display: grid; grid-template-columns: 160px 1fr; gap: 32px; align-items: start; }
+.s-num { font-family: var(--mono); font-size: 12px; color: var(--subtle); padding-top: 12px; border-top: 1px solid var(--border-strong); }
+.s-head h2 { font-size: clamp(32px, 4.4vw, 56px); line-height: 1.02; letter-spacing: -0.045em; font-weight: 600; max-width: 820px; }
+.s-head p { color: var(--muted); font-size: 17px; line-height: 26px; max-width: 560px; margin-top: 16px; }
+@media (max-width: 760px) { .s-head { grid-template-columns: 1fr; gap: 16px; } section.s { padding-top: 80px; } }
+
+/* Calibration: the snippet with callouts */
+.calib { margin: 48px 0 0 192px; position: relative; }
+.snippet { font-family: var(--mono); font-size: clamp(13px, 1.5vw, 17px); line-height: 1.6; padding: 28px 30px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); overflow-x: auto; white-space: nowrap; }
+.snippet .t { color: var(--subtle); } .snippet .a { color: var(--hero); } .snippet .s { color: var(--pulse); }
+.callouts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 0; }
+.callout { padding: 22px 22px 0 0; position: relative; }
+.callout::before { content: ""; position: absolute; left: 0; top: 0; width: 1px; height: 18px; background: var(--border-strong); }
+.callout .k { font-family: var(--mono); font-size: 12px; color: var(--pulse); padding-left: 12px; }
+.callout p { color: var(--muted); font-size: 15px; line-height: 23px; margin-top: 6px; padding-left: 12px; }
+@media (max-width: 960px) { .calib { margin-left: 0; } .callouts { grid-template-columns: 1fr; } }
+
+/* Channels: three instrument modules */
+.channels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+.mod { border: 1px solid var(--border); border-radius: 14px; background: var(--surface); padding: 20px; display: flex; flex-direction: column; gap: 18px; min-height: 380px; }
+.mod-top { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 12px; color: var(--subtle); }
+.mod-top .led { width: 8px; height: 8px; border-radius: 50%; background: var(--pulse); }
+.mod-top .led.r { background: var(--danger); }
+.mod h3 { font-size: 22px; line-height: 28px; letter-spacing: -0.02em; font-weight: 600; }
+.mod p { color: var(--muted); font-size: 14.5px; line-height: 22px; }
+.mod .viz { margin-top: auto; border-top: 1px dashed var(--border); padding-top: 16px; }
+.fbar { display: flex; flex-direction: column; gap: 10px; }
+.fbar div { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.fbar span { display: block; height: 10px; border-radius: 3px; background: #241d47; margin-top: 4px; overflow: hidden; }
+.fbar span i { display: block; height: 100%; background: var(--hero); border-radius: 3px; width: 0; transition: width 1.2s cubic-bezier(.2,.7,.2,1); }
+.in .fbar span i { width: var(--w); }
+.errline { font-family: var(--mono); font-size: 12px; line-height: 18px; padding: 10px 12px; border-radius: 8px; background: #3a1a14; color: var(--danger); }
+.errmeta { font-family: var(--mono); font-size: 11px; color: var(--subtle); margin-top: 8px; display: flex; justify-content: space-between; }
+.heat { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
+.heat i { height: 26px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 10.5px; font-style: normal; color: var(--ink); }
+@media (max-width: 960px) { .channels { grid-template-columns: 1fr; } .mod { min-height: 0; } }
+
+/* Spec sheet */
+.spec { margin: 48px 0 0 192px; border-top: 1px solid var(--border-strong); }
+.spec .row { display: grid; grid-template-columns: 260px 1fr 180px; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--border); align-items: baseline; }
+.spec .row .k { font-size: 15px; font-weight: 500; }
+.spec .row .d { color: var(--muted); font-size: 14.5px; line-height: 22px; }
+.spec .row .v { font-family: var(--mono); font-size: 15px; text-align: right; color: var(--pulse); }
+@media (max-width: 960px) { .spec { margin-left: 0; } .spec .row { grid-template-columns: 1fr auto; } .spec .row .d { grid-column: 1 / -1; grid-row: 2; } }
+
+/* Closing */
+.close { margin: 128px 0 0; padding: 72px 0; border-top: 1px solid var(--border); text-align: left; }
+.close h2 { font-size: clamp(40px, 6.4vw, 88px); line-height: .96; letter-spacing: -0.055em; font-weight: 600; max-width: 980px; }
+.close h2 span { color: var(--subtle); }
+footer { border-top: 1px solid var(--border); padding: 28px 0 40px; font-size: 13px; color: var(--subtle); }
+footer .wrap { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+footer .r { margin-left: auto; display: flex; gap: 20px; }
+
+.rise { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.rise.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .rise { opacity: 1; transform: none; transition: none; } .eyebrow b { animation: none; } }
+</style>
+</head>
+<body>
+<div class="ruler" aria-hidden="true"><i id="needle"></i></div>
+<main>
+  <nav class="top" aria-label="Main">
+    <div class="wrap">
+      <a href="/" class="brand" aria-label="Track Hero home"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#5b3df5"/><path d="M24 15V39Q24 49 34 49H42" fill="none" stroke="#fff" stroke-width="7"/><path d="M13 29H30L46 17" fill="none" stroke="#fff" stroke-width="7"/><circle cx="49" cy="15" r="6" fill="#c6f24e"/></svg>trackhero</a>
+      <div class="links"><a href="/product" aria-current="page">Product</a><a href="/product#spec">Security</a><a href="https://track-hero.vercel.app/docs">Docs</a></div>
+      <div class="r"><a href="https://track-hero.vercel.app/login" class="btn">Log in</a><a href="https://track-hero.vercel.app/signup" class="btn p">Start free</a></div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow"><b></b>Product analytics + error monitoring</div>
+      <h1>Your app, measured to the <em>last click</em>.</h1>
+      <p class="lede">Track Hero records what people do in your web app and catches what breaks along the way. One line to install. Readings in seconds.</p>
+      <div class="cta"><a href="https://track-hero.vercel.app/signup" class="btn p">Start measuring, free</a><a href="/" class="btn">Watch it track you</a></div>
+
+      <div class="scope rise" role="img" aria-label="Animated demo of a live traffic signal with readouts for active users, events per minute, signup conversion and error rate">
+        <div class="scope-head">
+          <span class="ch"><i style="background:var(--hero)"></i>CH1 active users</span>
+          <span class="ch"><i style="background:var(--danger)"></i>CH2 errors</span>
+          <span class="r">northwind.shop · live</span>
+        </div>
+        <div class="screen"><canvas id="scope"></canvas></div>
+        <div class="readouts">
+          <div class="ro"><div class="l">Active users</div><div class="v" id="r-users">1,284</div><div class="d">▲ 12.4% vs last week</div></div>
+          <div class="ro"><div class="l">Events / min</div><div class="v" id="r-epm">412</div><div class="d">▲ 3.1%</div></div>
+          <div class="ro"><div class="l">Signup rate</div><div class="v">34.6<small>%</small></div><div class="d bad">▼ 2.1%</div></div>
+          <div class="ro"><div class="l">Error-free sessions</div><div class="v">99.2<small>%</small></div><div class="d">▲ 0.4%</div></div>
+        </div>
+        <div class="demo-note">Demo data from a sample shop. Your readings appear the moment your first visitor arrives.</div>
+      </div>
+    </div>
+  </header>
+
+  <section class="s" id="calibrate">
+    <div class="wrap">
+      <div class="s-head rise">
+        <div class="s-num">01 / Calibration</div>
+        <div><h2>One line. Everything else is automatic.</h2><p>Paste it into the head of your app. Pageviews, clicks, sessions and frontend errors start flowing without a tracking plan.</p></div>
+      </div>
+      <div class="calib rise">
+        <div class="snippet"><span class="t">&lt;script</span> <span class="a">src</span>=<span class="s">"https://track-hero.vercel.app/trackhero.js"</span> <span class="a">data-key</span>=<span class="s">"pk_your_key"</span> <span class="a">defer</span><span class="t">&gt;&lt;/script&gt;</span></div>
+        <div class="callouts">
+          <div class="callout"><div class="k">~3.4 KB</div><p>Compressed size of the script. Loads after your page, so it never slows the first paint.</p></div>
+          <div class="callout"><div class="k">pk_ key</div><p>A public key that can only send data, never read it. Safe in browser code.</p></div>
+          <div class="callout"><div class="k">consent mode</div><p>Hold tracking until a visitor agrees, then switch it on with one call.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="channels">
+    <div class="wrap">
+      <div class="s-head rise">
+        <div class="s-num">02 / Channels</div>
+        <div><h2>Three readings most tools make you buy separately.</h2><p>What people do, where they drop off, and what broke for them. In one place, tied to the same users.</p></div>
+      </div>
+      <div class="channels">
+        <article class="mod rise">
+          <div class="mod-top"><span>CH1 · Funnels</span><span class="led"></span></div>
+          <h3>See where people give up.</h3>
+          <p>Pick the steps of any journey. Track Hero shows how many make it through each one, and which step loses the most.</p>
+          <div class="viz fbar">
+            <div>1 · page_viewed <span><i style="--w:100%"></i></span></div>
+            <div>2 · signup_started <span><i style="--w:35%"></i></span></div>
+            <div>3 · signup_completed <span><i style="--w:26%"></i></span></div>
+            <div>4 · first_project <span><i style="--w:17%"></i></span></div>
+          </div>
+        </article>
+        <article class="mod rise">
+          <div class="mod-top"><span>CH2 · Errors</span><span class="led r"></span></div>
+          <h3>Know what broke, for whom, and why.</h3>
+          <p>Errors are grouped by cause, linked to the people who hit them and the clicks that led there. Copy a ready-made fix prompt for your AI coding tool.</p>
+          <div class="viz">
+            <div class="errline">TypeError: Cannot read properties of undefined (reading 'amount')</div>
+            <div class="errmeta"><span>/checkout · after clicking "Pay now"</span><span>23 users</span></div>
+          </div>
+        </article>
+        <article class="mod rise">
+          <div class="mod-top"><span>CH3 · Retention</span><span class="led"></span></div>
+          <h3>Find out who comes back.</h3>
+          <p>Weekly cohorts show whether people return after their first visit, so you know if a change made your app stickier.</p>
+          <div class="viz heat" aria-hidden="true">
+            <i style="background:#5b3df5">100%</i><i style="background:#4e3fa0">41%</i><i style="background:#3d3282">33%</i><i style="background:#322a6b">27%</i><i style="background:#28224f">22%</i>
+            <i style="background:#5b3df5">100%</i><i style="background:#4e3fa0">44%</i><i style="background:#3d3282">35%</i><i style="background:#322a6b">29%</i><i style="background:#0b0a10;color:#8f8aa3">–</i>
+            <i style="background:#5b3df5">100%</i><i style="background:#4e3fa0">47%</i><i style="background:#3d3282">36%</i><i style="background:#0b0a10;color:#8f8aa3">–</i><i style="background:#0b0a10;color:#8f8aa3">–</i>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="spec">
+    <div class="wrap">
+      <div class="s-head rise">
+        <div class="s-num">03 / Security</div>
+        <div><h2>Built to be trusted with your users.</h2></div>
+      </div>
+      <div class="spec rise">
+        <div class="row"><span class="k">Personal data scrubbing</span><span class="d">Emails, card numbers and tokens are stripped from URLs and properties before they are stored.</span><span class="v">on by default</span></div>
+        <div class="row"><span class="k">Allowed domains</span><span class="d">Only accept data from the sites you list, so nobody can send noise with your key.</span><span class="v">per project</span></div>
+        <div class="row"><span class="k">Server events</span><span class="d">Send backend errors and events from Node.js or any server with a secret key.</span><span class="v">HTTP + Node SDK</span></div>
+        <div class="row"><span class="k">Identity stitching</span><span class="d">Visits from before someone signs up are joined to their account automatically.</span><span class="v">automatic</span></div>
+        <div class="row"><span class="k">Batch size</span><span class="d">Events are queued and sent together, so busy pages stay light on the network.</span><span class="v">up to 50</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="close rise">
+      <h2>Stop guessing. <span>Start reading the signal.</span></h2>
+      <div class="cta"><a href="https://track-hero.vercel.app/signup" class="btn p">Start free</a><a href="/" class="btn">Watch it track you</a></div>
+    </div>
+  </div>
+  <footer><div class="wrap"><span>© 2026 Track Hero · Product analytics and error monitoring for web apps</span><div class="r"><a href="/product">Product</a><a href="https://track-hero.vercel.app/docs">Docs</a><a href="https://track-hero.vercel.app/login">Log in</a></div></div></footer>
+</main>
+
+<script>
+// Needle on the ruler follows scroll position.
+const needle = document.getElementById("needle");
+const onScroll = () => { const max = document.documentElement.scrollHeight - innerHeight; needle.style.top = `${(scrollY / Math.max(1, max)) * (innerHeight - 10)}px`; };
+addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+// Reveal on scroll.
+const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && (e.target.classList.add("in"), io.unobserve(e.target))), { threshold: 0.15 });
+document.querySelectorAll(".rise").forEach((el) => io.observe(el));
+
+// Oscilloscope: a smooth signal that scrolls left, with occasional error spikes on channel 2.
+const cv = document.getElementById("scope"), ctx = cv.getContext("2d");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let W, H, t = 0; const pts = [], errs = [];
+function size() { const r = cv.getBoundingClientRect(); W = cv.width = r.width * devicePixelRatio; H = cv.height = r.height * devicePixelRatio; }
+size(); addEventListener("resize", size);
+const N = 160;
+for (let i = 0; i < N; i++) { pts.push(sig(i)); errs.push(0); }
+function sig(x) { return 0.55 + 0.16 * Math.sin(x / 11) + 0.08 * Math.sin(x / 3.7) + 0.05 * Math.sin(x / 1.9 + 1); }
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  const step = W / (N - 1);
+  // area fill
+  ctx.beginPath(); ctx.moveTo(0, H);
+  pts.forEach((p, i) => ctx.lineTo(i * step, H - p * H * 0.8));
+  ctx.lineTo(W, H); ctx.closePath(); ctx.fillStyle = "rgba(139,120,255,0.12)"; ctx.fill();
+  // line
+  ctx.beginPath(); pts.forEach((p, i) => (i ? ctx.lineTo : ctx.moveTo).call(ctx, i * step, H - p * H * 0.8));
+  ctx.strokeStyle = "#8b78ff"; ctx.lineWidth = 2 * devicePixelRatio; ctx.stroke();
+  // error channel
+  errs.forEach((e, i) => { if (e > 0) { ctx.fillStyle = "#ff8a73"; ctx.fillRect(i * step - devicePixelRatio, H - e * H * 0.5, 2 * devicePixelRatio, e * H * 0.5); } });
+  // lime tip
+  const y = H - pts[N - 1] * H * 0.8;
+  ctx.beginPath(); ctx.arc(W - 4 * devicePixelRatio, y, 5 * devicePixelRatio, 0, Math.PI * 2); ctx.fillStyle = "#c6f24e"; ctx.fill();
+}
+let last = 0, users = 1284;
+function tick(now) {
+  if (now - last > 90) {
+    last = now; t++;
+    pts.shift(); pts.push(sig(N + t) + (Math.random() - 0.5) * 0.04);
+    errs.shift(); errs.push(Math.random() < 0.025 ? 0.2 + Math.random() * 0.4 : 0);
+    if (t % 12 === 0) { users += Math.round((Math.random() - 0.4) * 6); document.getElementById("r-users").textContent = users.toLocaleString("en-US"); document.getElementById("r-epm").textContent = (390 + Math.round(Math.random() * 50)).toString(); }
+    draw();
+  }
+  if (!reduce) requestAnimationFrame(tick);
+}
+draw(); if (!reduce) requestAnimationFrame(tick);
+</script>
+</body>
+</html>
