@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The impact of the analytics you're not tracking · Track Hero</title>
+<meta name="description" content="Every dashboard shows what you chose to measure. The decisions that hurt your product are usually made in the gaps.">
+<meta property="og:title" content="The impact of the analytics you're not tracking">
+<meta property="og:description" content="Every dashboard shows what you chose to measure. The decisions that hurt your product are usually made in the gaps.">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2026-11-05">
+<meta name="theme-color" content="#0b0a10">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The impact of the analytics you're not tracking","datePublished":"2026-11-05","author":{"@type":"Organization","name":"Track Hero"},"image":"/blog/covers/analytics-you-are-not-tracking.svg"}</script>
+</head>
+<body>
+<div class="ruler" aria-hidden="true"><i></i></div>
+<main>
+  <nav class="top" aria-label="Main">
+    <div class="wrap">
+      <a href="/" class="brand" aria-label="Track Hero home"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#5b3df5"/><path d="M24 15V39Q24 49 34 49H42" fill="none" stroke="#fff" stroke-width="7"/><path d="M13 29H30L46 17" fill="none" stroke="#fff" stroke-width="7"/><circle cx="49" cy="15" r="6" fill="#c6f24e"/></svg>trackhero</a>
+      <div class="links"><a href="/product">Product</a><a href="/security">Security</a><a href="/blog" aria-current="page">Blog</a><a href="https://track-hero.vercel.app/docs">Docs</a></div>
+      <div class="r"><a href="https://track-hero.vercel.app/login" class="btn">Log in</a><a href="https://track-hero.vercel.app/signup" class="btn p">Start free</a></div>
+    </div>
+  </nav>
+
+  <article>
+    <header class="post-hero">
+      <div class="wrap">
+        <div class="post-meta"><a href="/blog">Field notes</a><span>5 November 2026</span><span>4 min read</span><span>Track Hero team</span></div>
+        <h1>The impact of the analytics you're not tracking</h1>
+        <p class="lede">Every dashboard shows what you chose to measure. The decisions that hurt your product are usually made in the gaps.</p>
+        <figure class="cover">
+          <img src="/blog/covers/analytics-you-are-not-tracking.svg" width="1600" height="900" alt="An iceberg drawn in dots. A small violet tip sits above a dashed line labelled what you see. A much larger mass of faint dots sits below it, labelled what you don't.">
+          <figcaption>What most dashboards show, and everything underneath.</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <div class="wrap">
+      <div class="prose">
+        <p>Most web apps are measured the same way. A pageview counter, maybe a signup count, and a feeling about how things are going. When the numbers go up, the last thing you shipped gets the credit. When they go down, it gets the blame.</p>
+        <p>The problem isn't the numbers you have. It's the ones you don't. Behaviour you don't track doesn't disappear. It still shapes your revenue, your roadmap and your reputation. You just can't see it happening.</p>
+        <p>Here are five blind spots almost every product has, what each one quietly costs, and where to start.</p>
+
+        <h2><span class="n">01</span>The drop-off you can't locate</h2>
+        <p>Signups fell this week. Without a funnel, all you know is the ending. Was it the landing page, the pricing page, the form, the confirmation email? Each needs a different fix, and guessing wrong costs you a sprint.</p>
+        <table>
+          <thead><tr><th>Step</th><th style="text-align:right">People</th><th style="text-align:right">Of visitors</th></tr></thead>
+          <tbody>
+            <tr><td>Landed on the site</td><td class="num">10,000</td><td class="num">100%</td></tr>
+            <tr><td>Viewed pricing</td><td class="num">4,100</td><td class="num">41%</td></tr>
+            <tr><td>Started signup</td><td class="num">1,450</td><td class="num">15%</td></tr>
+            <tr><td>Completed signup</td><td class="num">1,060</td><td class="num">11%</td></tr>
+            <tr><td>Created a first project</td><td class="num">690</td><td class="num">7%</td></tr>
+          </tbody>
+        </table>
+        <p class="note">An illustrative funnel. The step to fix first is the one with the biggest drop: here, 65% of people who view pricing never start signing up. Looking only at the final number would have pointed you at the wrong page.</p>
+        <p>Small leaks also compound. If four steps each lose just 5% more people than they should, you don't lose 5% overall. You lose about <strong>19% of everyone who started</strong>, because 0.95 × 0.95 × 0.95 × 0.95 is roughly 0.81. No single step looks broken, so nobody fixes any of them.</p>
+
+        <h2><span class="n">02</span>The errors nobody reports</h2>
+        <p>When something breaks, most people don't write to support. They try once more, then leave. From your side, a broken checkout looks exactly like a slow week.</p>
+        <p>That makes untracked errors the most expensive kind of silence. They don't show up as bugs. They show up as churn, refunds and frustrated reviews weeks later, long after anyone could connect them to a release.</p>
+        <p>A list of errors isn't enough on its own. What you need is the link between an error and the people it hit: how many, on which page, after which click, and whether they ever came back.</p>
+
+        <h2><span class="n">03</span>The anonymous majority</h2>
+        <p>Most people who visit your app never sign up, and the ones who do usually visit a few times first. If your analytics only start counting at signup, you're judging your product by its last chapter.</p>
+        <p>You lose the answers to the questions that shape growth. Which page convinced them? How many visits did it take? Did they come from a search, a post or a friend's link? Unless those early anonymous visits are joined to the account they become, your marketing and your product decisions are both working blind.</p>
+
+        <h2><span class="n">04</span>Growth that hides churn</h2>
+        <p>A rising user count feels like progress. But if new people arrive as fast as existing ones leave, the line goes up while the product stands still. Only retention, measured by cohort, separates the two.</p>
+        <p>A weekly cohort view answers a simple question: of the people who arrived in a given week, how many were still using your product a week later, or a month later? If that number improves after a release, the release worked. If it doesn't, more traffic won't save it.</p>
+
+        <h2><span class="n">05</span>Features nobody uses</h2>
+        <p>Every feature costs time to build and keeps costing time to maintain. Without usage data, features stay because nobody can prove they don't matter, and the roadmap fills up with guesses.</p>
+        <p>Tracking one event when a feature is used turns that debate into a number. Some features turn out to be the reason people stay. Others turn out to be furniture.</p>
+
+        <h2><span class="n">06</span>What to track first</h2>
+        <p>You don't need a tracking plan with hundreds of events. Start with five things:</p>
+        <ol>
+          <li><strong>Pageviews and clicks, captured automatically,</strong> so you have a baseline without writing tracking code.</li>
+          <li><strong>One funnel for your most important journey,</strong> usually from first visit to signup to the first moment of real value.</li>
+          <li><strong>Errors from your frontend and backend,</strong> tied to the people who hit them.</li>
+          <li><strong>Identity,</strong> so visits from before signup are joined to the account.</li>
+          <li><strong>One event for each feature you're unsure about,</strong> such as <code>report_exported</code> or <code>invite_sent</code>.</li>
+        </ol>
+        <p>That's enough to answer the questions that actually change what you build.</p>
+
+        <blockquote>The cost of not tracking isn't a missing chart. It's every decision you make without one.</blockquote>
+      </div>
+
+      <aside class="post-end">
+        <h3>See what you're missing.</h3>
+        <p>Track Hero captures visits, clicks, sessions and errors with one line of code, then turns them into funnels, retention and alerts tied to real people.</p>
+        <div class="cta" style="margin-top:20px"><a href="https://track-hero.vercel.app/signup" class="btn p">Start free</a><a href="/" class="btn">Watch it track you</a></div>
+      </aside>
+    </div>
+  </article>
+
+  <div class="wrap"><div style="height:96px"></div></div>
+  <footer><div class="wrap"><span>© 2026 Track Hero</span><div class="r"><a href="/product">Product</a><a href="/security">Security</a><a href="/blog">Blog</a><a href="https://track-hero.vercel.app/docs">Docs</a><a href="https://track-hero.vercel.app/login">Log in</a></div></div></footer>
+</main>
+<script src="/site.js"></script>
+</body>
+</html>

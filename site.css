@@ -74,3 +74,41 @@ footer .r { margin-left: auto; display: flex; gap: 20px; flex-wrap: wrap; }
 .rise { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
 .rise.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .rise { opacity: 1; transform: none; transition: none; } }
+
+/* Blog */
+.post-hero { padding: 64px 0 0; }
+.post-meta { font-family: var(--mono); font-size: 12px; color: var(--subtle); display: flex; gap: 14px; flex-wrap: wrap; letter-spacing: .02em; }
+.post-meta a { color: var(--hero-ink); }
+.post-hero h1 { font-size: clamp(40px, 6vw, 80px); max-width: 980px; margin-top: 18px; }
+.post-hero .lede { max-width: 680px; }
+.cover { margin-top: 40px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--bg); }
+.cover img { display: block; width: 100%; height: auto; }
+.cover figcaption { font-family: var(--mono); font-size: 11px; color: var(--subtle); padding: 10px 16px; border-top: 1px solid var(--border); }
+.prose { max-width: 680px; margin: 56px auto 0; font-size: 18px; line-height: 30px; color: #d9d6e4; }
+.prose > * + * { margin-top: 22px; }
+.prose h2 { font-size: 30px; line-height: 36px; letter-spacing: -0.035em; font-weight: 600; color: var(--ink); margin-top: 56px; }
+.prose h2 .n { font-family: var(--mono); font-size: 13px; color: var(--pulse); display: block; letter-spacing: .04em; margin-bottom: 8px; font-weight: 400; }
+.prose strong { color: var(--ink); font-weight: 600; }
+.prose a { color: var(--hero-ink); text-decoration: underline; text-underline-offset: 3px; }
+.prose code { font-family: var(--mono); font-size: 15px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--ink); }
+.prose ul, .prose ol { padding-left: 22px; }
+.prose li + li { margin-top: 10px; }
+.prose li::marker { color: var(--subtle); font-family: var(--mono); }
+.prose blockquote { border-left: 2px solid var(--hero); padding: 4px 0 4px 22px; font-size: 24px; line-height: 34px; letter-spacing: -0.02em; color: var(--ink); }
+.prose .note { font-size: 15px; line-height: 24px; color: var(--muted); padding: 16px 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.prose table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 22px; }
+.prose th { text-align: left; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--subtle); padding: 8px 12px 8px 0; border-bottom: 1px solid var(--border-strong); }
+.prose td { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+.prose td.num { font-family: var(--mono); text-align: right; color: var(--ink); white-space: nowrap; }
+.post-end { max-width: 680px; margin: 64px auto 0; padding: 28px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
+.post-end h3 { font-size: 24px; letter-spacing: -0.03em; font-weight: 600; }
+.post-end p { color: var(--muted); font-size: 15.5px; line-height: 24px; margin-top: 8px; }
+@media (max-width: 760px) { .prose { font-size: 17px; line-height: 28px; margin-top: 40px; } .prose h2 { font-size: 25px; line-height: 31px; } .prose blockquote { font-size: 20px; line-height: 29px; } }
+
+.posts { margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); gap: 16px; }
+.post-card { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--surface); display: flex; flex-direction: column; }
+.post-card:hover { border-color: var(--hero); }
+.post-card img { display: block; width: 100%; height: auto; border-bottom: 1px solid var(--border); }
+.post-card .b { padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 10px; }
+.post-card h2 { font-size: 26px; line-height: 31px; letter-spacing: -0.035em; font-weight: 600; }
+.post-card p { color: var(--muted); font-size: 15px; line-height: 23px; }
