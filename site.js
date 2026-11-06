@@ -22,6 +22,14 @@ if (cv) {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const N = 160, pts = [], errs = [];
   let W = 0, H = 0, t = 0, last = 0;
+  // Colours come from the theme, so the chart follows light and dark mode.
+  let col = {};
+  const readColours = () => {
+    const cs = getComputedStyle(document.documentElement);
+    col = { line: cs.getPropertyValue("--hero").trim(), err: cs.getPropertyValue("--danger").trim(), tip: cs.getPropertyValue("--pulse").trim() };
+  };
+  readColours();
+  document.addEventListener("themechange", () => { readColours(); draw(); });
   const sig = (x) => 0.55 + 0.16 * Math.sin(x / 11) + 0.08 * Math.sin(x / 3.7) + 0.05 * Math.sin(x / 1.9 + 1);
   for (let i = 0; i < N; i++) { pts.push(sig(i)); errs.push(0); }
   const size = () => { const r = cv.getBoundingClientRect(); W = cv.width = r.width * devicePixelRatio; H = cv.height = r.height * devicePixelRatio; draw(); };
@@ -31,11 +39,11 @@ if (cv) {
     const step = W / (N - 1);
     ctx.beginPath(); ctx.moveTo(0, H);
     pts.forEach((p, i) => ctx.lineTo(i * step, H - p * H * 0.8));
-    ctx.lineTo(W, H); ctx.closePath(); ctx.fillStyle = "rgba(139,120,255,0.12)"; ctx.fill();
+    ctx.lineTo(W, H); ctx.closePath(); ctx.globalAlpha = 0.12; ctx.fillStyle = col.line; ctx.fill(); ctx.globalAlpha = 1;
     ctx.beginPath(); pts.forEach((p, i) => (i ? ctx.lineTo(i * step, H - p * H * 0.8) : ctx.moveTo(0, H - p * H * 0.8)));
-    ctx.strokeStyle = "#8b78ff"; ctx.lineWidth = 2 * devicePixelRatio; ctx.stroke();
-    errs.forEach((e, i) => { if (e > 0) { ctx.fillStyle = "#ff8a73"; ctx.fillRect(i * step - devicePixelRatio, H - e * H * 0.5, 2 * devicePixelRatio, e * H * 0.5); } });
-    ctx.beginPath(); ctx.arc(W - 4 * devicePixelRatio, H - pts[N - 1] * H * 0.8, 5 * devicePixelRatio, 0, Math.PI * 2); ctx.fillStyle = "#c6f24e"; ctx.fill();
+    ctx.strokeStyle = col.line; ctx.lineWidth = 2 * devicePixelRatio; ctx.stroke();
+    errs.forEach((e, i) => { if (e > 0) { ctx.fillStyle = col.err; ctx.fillRect(i * step - devicePixelRatio, H - e * H * 0.5, 2 * devicePixelRatio, e * H * 0.5); } });
+    ctx.beginPath(); ctx.arc(W - 4 * devicePixelRatio, H - pts[N - 1] * H * 0.8, 5 * devicePixelRatio, 0, Math.PI * 2); ctx.fillStyle = col.tip; ctx.fill();
   }
   function tick(now) {
     if (now - last > 90) {
